@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
-const UserAgent = require('fake-useragent');
+const fakeUa = require('fake-useragent');
 
 const app = express();
 
@@ -10,7 +10,7 @@ const jsongen = async (url) => {
     const headers = {
       'X-Signature-Version': 'web2',
       'X-Signature': crypto.randomBytes(32).toString('hex'),
-      'User-Agent': new UserAgent().random,
+      'User-Agent': new fakeUa().random,
     };
     const res = await axios.get(url, { headers });
     return res.data;
